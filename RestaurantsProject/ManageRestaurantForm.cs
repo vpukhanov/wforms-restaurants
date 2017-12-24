@@ -43,5 +43,22 @@ namespace RestaurantsProject
             };
             manageWaitersForm.ShowDialog();
         }
+
+        private void StartWorkButton_Click(object sender, EventArgs e)
+        {
+            ManageWorkshiftForm workshiftForm = new ManageWorkshiftForm
+            {
+                MyRestaurant = MyRestaurant
+            };
+            workshiftForm.FormClosing += WorkshiftForm_FormClosing;
+            workshiftForm.Show();
+
+            Hide();
+        }
+
+        private void WorkshiftForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            Show();
+        }
     }
 }

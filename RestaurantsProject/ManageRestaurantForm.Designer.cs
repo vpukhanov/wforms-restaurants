@@ -73,6 +73,7 @@
             this.StartWorkButton.TabIndex = 4;
             this.StartWorkButton.Text = "Открыть смену";
             this.StartWorkButton.UseVisualStyleBackColor = true;
+            this.StartWorkButton.Click += new System.EventHandler(this.StartWorkButton_Click);
             // 
             // ManageRestaurantForm
             // 
