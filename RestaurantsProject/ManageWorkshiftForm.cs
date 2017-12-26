@@ -29,6 +29,10 @@ namespace RestaurantsProject
 
         private void ManageWorkshiftForm_Load(object sender, EventArgs e)
         {
+            // TODO: данная строка кода позволяет загрузить данные в таблицу "restaurantsDataSet.waiters". При необходимости она может быть перемещена или удалена.
+            this.waitersTableAdapter.Fill(this.restaurantsDataSet.waiters);
+            // TODO: данная строка кода позволяет загрузить данные в таблицу "restaurantsDataSet.orders". При необходимости она может быть перемещена или удалена.
+            this.ordersTableAdapter.Fill(this.restaurantsDataSet.orders);
             // TODO: данная строка кода позволяет загрузить данные в таблицу "restaurantsDataSet.customers". При необходимости она может быть перемещена или удалена.
             this.customersTableAdapter.FillByRestaurantId(this.restaurantsDataSet.customers, MyRestaurant.Id);
             this.tablesTableAdapter.FillByRestaurantId(this.restaurantsDataSet.tables, MyRestaurant.Id);
@@ -179,6 +183,59 @@ namespace RestaurantsProject
         {
             customersDataGridView_RowValidated(null, new DataGridViewCellEventArgs(-1, customersDataGridView.SelectedRows[0].Index));
             customersDataGridView_SelectionChanged(null, null);
+        }
+
+        private void AddOrderButton_Click(object sender, EventArgs e)
+        {
+            var selectedRow = customersDataGridView.SelectedRows[0];
+
+            EditOrderForm orderForm = new EditOrderForm
+            {
+                RestaurantId = MyRestaurant.Id,
+                CustomerId = (decimal)selectedRow.Cells["id"].Value
+            };
+            orderForm.ShowDialog();
+
+            var customerRow = restaurantsDataSet.customers.FindByid((decimal)selectedRow.Cells["id"].Value);
+            customerRow.state = 2;
+            customersTableAdapter.Update(restaurantsDataSet.customers);
+
+            updateUI();
+        }
+
+        private void CollectPaymentButton_Click(object sender, EventArgs e)
+        {
+            var selectedRow = customersDataGridView.SelectedRows[0];
+            var customerRow = restaurantsDataSet.customers.FindByid((decimal)selectedRow.Cells["id"].Value);
+            var tableRow = restaurantsDataSet.tables.FindBytable_numberrestaurant_id(customerRow.table_number, customerRow.table_restaurant_id);
+            var waiterRow = restaurantsDataSet.waiters.FindByid(tableRow.waiter_id);
+            var totalPayment = (decimal)ordersTableAdapter.GetTotalByCustomerId(customerRow.id);
+
+            if (totalPayment <= customerRow.money)
+            {
+                waiterRow.earned_money += totalPayment;
+                customerRow.money -= totalPayment;
+
+                MessageBox.Show("Клиент выплатил " + totalPayment.ToString("C2") + " официанту " +
+                    waiterRow.last_name + " " + waiterRow.first_name, "Информация", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            else
+            {
+                waiterRow.earned_pants++;
+                customerRow.money = 0;
+
+                MessageBox.Show("Клиент расплатился с официантом " +
+                    waiterRow.last_name + " " + waiterRow.first_name + " штанами", "Информация", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+            }
+
+            customerRow.state = 3;
+            tableRow.busy = false;
+
+            waitersTableAdapter.Update(restaurantsDataSet.waiters);
+            tablesTableAdapter.Update(restaurantsDataSet.tables);
+            customersTableAdapter.Update(restaurantsDataSet.customers);
+
+            updateUI();
         }
     }
 }

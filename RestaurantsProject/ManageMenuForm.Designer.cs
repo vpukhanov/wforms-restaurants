@@ -29,18 +29,19 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.restaurantsDataSet = new RestaurantsProject.RestaurantsDataSet();
             this.dishesBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.dishesTableAdapter = new RestaurantsProject.RestaurantsDataSetTableAdapters.dishesTableAdapter();
             this.tableAdapterManager = new RestaurantsProject.RestaurantsDataSetTableAdapters.TableAdapterManager();
             this.dishesDataGridView = new System.Windows.Forms.DataGridView();
+            this.AddDishButton = new System.Windows.Forms.Button();
+            this.EditDishButton = new System.Windows.Forms.Button();
+            this.DeleteDishButton = new System.Windows.Forms.Button();
             this.name = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.price = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.id = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.restaurant_id = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.AddDishButton = new System.Windows.Forms.Button();
-            this.EditDishButton = new System.Windows.Forms.Button();
-            this.DeleteDishButton = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.restaurantsDataSet)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dishesBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dishesDataGridView)).BeginInit();
@@ -93,40 +94,6 @@
             this.dishesDataGridView.TabIndex = 1;
             this.dishesDataGridView.SelectionChanged += new System.EventHandler(this.dishesDataGridView_SelectionChanged);
             // 
-            // name
-            // 
-            this.name.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.name.DataPropertyName = "name";
-            this.name.FillWeight = 70F;
-            this.name.HeaderText = "Блюдо";
-            this.name.Name = "name";
-            this.name.ReadOnly = true;
-            // 
-            // price
-            // 
-            this.price.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.price.DataPropertyName = "price";
-            this.price.FillWeight = 30F;
-            this.price.HeaderText = "Цена";
-            this.price.Name = "price";
-            this.price.ReadOnly = true;
-            // 
-            // id
-            // 
-            this.id.DataPropertyName = "id";
-            this.id.HeaderText = "id";
-            this.id.Name = "id";
-            this.id.ReadOnly = true;
-            this.id.Visible = false;
-            // 
-            // restaurant_id
-            // 
-            this.restaurant_id.DataPropertyName = "restaurant_id";
-            this.restaurant_id.HeaderText = "restaurant_id";
-            this.restaurant_id.Name = "restaurant_id";
-            this.restaurant_id.ReadOnly = true;
-            this.restaurant_id.Visible = false;
-            // 
             // AddDishButton
             // 
             this.AddDishButton.Location = new System.Drawing.Point(12, 340);
@@ -159,6 +126,42 @@
             this.DeleteDishButton.UseVisualStyleBackColor = true;
             this.DeleteDishButton.Click += new System.EventHandler(this.DeleteDishButton_Click);
             // 
+            // name
+            // 
+            this.name.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.name.DataPropertyName = "name";
+            this.name.FillWeight = 70F;
+            this.name.HeaderText = "Блюдо";
+            this.name.Name = "name";
+            this.name.ReadOnly = true;
+            // 
+            // price
+            // 
+            this.price.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.price.DataPropertyName = "price";
+            dataGridViewCellStyle1.Format = "C2";
+            this.price.DefaultCellStyle = dataGridViewCellStyle1;
+            this.price.FillWeight = 30F;
+            this.price.HeaderText = "Цена";
+            this.price.Name = "price";
+            this.price.ReadOnly = true;
+            // 
+            // id
+            // 
+            this.id.DataPropertyName = "id";
+            this.id.HeaderText = "id";
+            this.id.Name = "id";
+            this.id.ReadOnly = true;
+            this.id.Visible = false;
+            // 
+            // restaurant_id
+            // 
+            this.restaurant_id.DataPropertyName = "restaurant_id";
+            this.restaurant_id.HeaderText = "restaurant_id";
+            this.restaurant_id.Name = "restaurant_id";
+            this.restaurant_id.ReadOnly = true;
+            this.restaurant_id.Visible = false;
+            // 
             // ManageMenuForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -185,12 +188,12 @@
         private RestaurantsDataSetTableAdapters.dishesTableAdapter dishesTableAdapter;
         private RestaurantsDataSetTableAdapters.TableAdapterManager tableAdapterManager;
         private System.Windows.Forms.DataGridView dishesDataGridView;
+        private System.Windows.Forms.Button AddDishButton;
+        private System.Windows.Forms.Button EditDishButton;
+        private System.Windows.Forms.Button DeleteDishButton;
         private System.Windows.Forms.DataGridViewTextBoxColumn name;
         private System.Windows.Forms.DataGridViewTextBoxColumn price;
         private System.Windows.Forms.DataGridViewTextBoxColumn id;
         private System.Windows.Forms.DataGridViewTextBoxColumn restaurant_id;
-        private System.Windows.Forms.Button AddDishButton;
-        private System.Windows.Forms.Button EditDishButton;
-        private System.Windows.Forms.Button DeleteDishButton;
     }
 }

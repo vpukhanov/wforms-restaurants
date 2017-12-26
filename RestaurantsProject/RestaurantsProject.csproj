@@ -58,6 +58,18 @@
     <Compile Include="EditDishForm.Designer.cs">
       <DependentUpon>EditDishForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="EditOrderForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="EditOrderForm.Designer.cs">
+      <DependentUpon>EditOrderForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="EditOrderItemForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="EditOrderItemForm.Designer.cs">
+      <DependentUpon>EditOrderItemForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="EditRestaurantForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -100,6 +112,9 @@
     <Compile Include="ManageWorkshiftForm.Designer.cs">
       <DependentUpon>ManageWorkshiftForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="RestaurantsDataSet.cs">
+      <DependentUpon>RestaurantsDataSet.xsd</DependentUpon>
+    </Compile>
     <Compile Include="RestaurantsDataSet.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -124,6 +139,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="EditDishForm.resx">
       <DependentUpon>EditDishForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="EditOrderForm.resx">
+      <DependentUpon>EditOrderForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="EditOrderItemForm.resx">
+      <DependentUpon>EditOrderItemForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="EditRestaurantForm.resx">
       <DependentUpon>EditRestaurantForm.cs</DependentUpon>

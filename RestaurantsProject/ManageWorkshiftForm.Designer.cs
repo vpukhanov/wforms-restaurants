@@ -29,28 +29,29 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.customersDataGridView = new System.Windows.Forms.DataGridView();
-            this.state_desc = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.customersBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.restaurantsDataSet = new RestaurantsProject.RestaurantsDataSet();
             this.AddCustomerButton = new System.Windows.Forms.Button();
             this.DeleteCustomerButton = new System.Windows.Forms.Button();
             this.AssignTableButton = new System.Windows.Forms.Button();
             this.AddOrderButton = new System.Windows.Forms.Button();
             this.CollectPaymentButton = new System.Windows.Forms.Button();
-            this.id = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.money = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.table_number = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.table_restaurant_id = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.state = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.customersBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.restaurantsDataSet = new RestaurantsProject.RestaurantsDataSet();
             this.customersTableAdapter = new RestaurantsProject.RestaurantsDataSetTableAdapters.customersTableAdapter();
             this.tableAdapterManager = new RestaurantsProject.RestaurantsDataSetTableAdapters.TableAdapterManager();
             this.tablesTableAdapter = new RestaurantsProject.RestaurantsDataSetTableAdapters.tablesTableAdapter();
-            this.tablesBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.ordersTableAdapter = new RestaurantsProject.RestaurantsDataSetTableAdapters.ordersTableAdapter();
+            this.waitersTableAdapter = new RestaurantsProject.RestaurantsDataSetTableAdapters.waitersTableAdapter();
+            this.id = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.money = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.state_desc = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.table_number = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.table_restaurant_id = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.state = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.customersDataGridView)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.customersBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.restaurantsDataSet)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.tablesBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
             // customersDataGridView
@@ -79,13 +80,15 @@
             this.customersDataGridView.SelectionChanged += new System.EventHandler(this.customersDataGridView_SelectionChanged);
             this.customersDataGridView.Sorted += new System.EventHandler(this.customersDataGridView_Sorted);
             // 
-            // state_desc
+            // customersBindingSource
             // 
-            this.state_desc.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.state_desc.FillWeight = 50F;
-            this.state_desc.HeaderText = "Состояние";
-            this.state_desc.Name = "state_desc";
-            this.state_desc.ReadOnly = true;
+            this.customersBindingSource.DataMember = "customers";
+            this.customersBindingSource.DataSource = this.restaurantsDataSet;
+            // 
+            // restaurantsDataSet
+            // 
+            this.restaurantsDataSet.DataSetName = "RestaurantsDataSet";
+            this.restaurantsDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
             // 
             // AddCustomerButton
             // 
@@ -128,6 +131,7 @@
             this.AddOrderButton.TabIndex = 5;
             this.AddOrderButton.Text = "Записать заказ клиента";
             this.AddOrderButton.UseVisualStyleBackColor = true;
+            this.AddOrderButton.Click += new System.EventHandler(this.AddOrderButton_Click);
             // 
             // CollectPaymentButton
             // 
@@ -138,6 +142,35 @@
             this.CollectPaymentButton.TabIndex = 6;
             this.CollectPaymentButton.Text = "Получить оплату";
             this.CollectPaymentButton.UseVisualStyleBackColor = true;
+            this.CollectPaymentButton.Click += new System.EventHandler(this.CollectPaymentButton_Click);
+            // 
+            // customersTableAdapter
+            // 
+            this.customersTableAdapter.ClearBeforeFill = true;
+            // 
+            // tableAdapterManager
+            // 
+            this.tableAdapterManager.BackupDataSetBeforeUpdate = false;
+            this.tableAdapterManager.customersTableAdapter = this.customersTableAdapter;
+            this.tableAdapterManager.dishesTableAdapter = null;
+            this.tableAdapterManager.order_itemsTableAdapter = null;
+            this.tableAdapterManager.ordersTableAdapter = null;
+            this.tableAdapterManager.restaurantsTableAdapter = null;
+            this.tableAdapterManager.tablesTableAdapter = null;
+            this.tableAdapterManager.UpdateOrder = RestaurantsProject.RestaurantsDataSetTableAdapters.TableAdapterManager.UpdateOrderOption.InsertUpdateDelete;
+            this.tableAdapterManager.waitersTableAdapter = null;
+            // 
+            // tablesTableAdapter
+            // 
+            this.tablesTableAdapter.ClearBeforeFill = true;
+            // 
+            // ordersTableAdapter
+            // 
+            this.ordersTableAdapter.ClearBeforeFill = true;
+            // 
+            // waitersTableAdapter
+            // 
+            this.waitersTableAdapter.ClearBeforeFill = true;
             // 
             // id
             // 
@@ -152,10 +185,20 @@
             // 
             this.money.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
             this.money.DataPropertyName = "money";
+            dataGridViewCellStyle1.Format = "C2";
+            this.money.DefaultCellStyle = dataGridViewCellStyle1;
             this.money.FillWeight = 20F;
             this.money.HeaderText = "Сумма денег";
             this.money.Name = "money";
             this.money.ReadOnly = true;
+            // 
+            // state_desc
+            // 
+            this.state_desc.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.state_desc.FillWeight = 50F;
+            this.state_desc.HeaderText = "Состояние";
+            this.state_desc.Name = "state_desc";
+            this.state_desc.ReadOnly = true;
             // 
             // table_number
             // 
@@ -184,46 +227,11 @@
             this.state.ReadOnly = true;
             this.state.Visible = false;
             // 
-            // customersBindingSource
-            // 
-            this.customersBindingSource.DataMember = "customers";
-            this.customersBindingSource.DataSource = this.restaurantsDataSet;
-            // 
-            // restaurantsDataSet
-            // 
-            this.restaurantsDataSet.DataSetName = "RestaurantsDataSet";
-            this.restaurantsDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
-            // 
-            // customersTableAdapter
-            // 
-            this.customersTableAdapter.ClearBeforeFill = true;
-            // 
-            // tableAdapterManager
-            // 
-            this.tableAdapterManager.BackupDataSetBeforeUpdate = false;
-            this.tableAdapterManager.customersTableAdapter = this.customersTableAdapter;
-            this.tableAdapterManager.dishesTableAdapter = null;
-            this.tableAdapterManager.order_itemsTableAdapter = null;
-            this.tableAdapterManager.ordersTableAdapter = null;
-            this.tableAdapterManager.restaurantsTableAdapter = null;
-            this.tableAdapterManager.tablesTableAdapter = null;
-            this.tableAdapterManager.UpdateOrder = RestaurantsProject.RestaurantsDataSetTableAdapters.TableAdapterManager.UpdateOrderOption.InsertUpdateDelete;
-            this.tableAdapterManager.waitersTableAdapter = null;
-            // 
-            // tablesTableAdapter
-            // 
-            this.tablesTableAdapter.ClearBeforeFill = true;
-            // 
-            // tablesBindingSource
-            // 
-            this.tablesBindingSource.DataMember = "tables";
-            this.tablesBindingSource.DataSource = this.restaurantsDataSet;
-            // 
             // ManageWorkshiftForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(701, 365);
+            this.ClientSize = new System.Drawing.Size(709, 369);
             this.Controls.Add(this.CollectPaymentButton);
             this.Controls.Add(this.AddOrderButton);
             this.Controls.Add(this.AssignTableButton);
@@ -236,7 +244,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.customersDataGridView)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.customersBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.restaurantsDataSet)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.tablesBindingSource)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -248,18 +255,19 @@
         private RestaurantsDataSetTableAdapters.customersTableAdapter customersTableAdapter;
         private RestaurantsDataSetTableAdapters.TableAdapterManager tableAdapterManager;
         private System.Windows.Forms.DataGridView customersDataGridView;
-        private System.Windows.Forms.DataGridViewTextBoxColumn id;
-        private System.Windows.Forms.DataGridViewTextBoxColumn money;
-        private System.Windows.Forms.DataGridViewTextBoxColumn state_desc;
-        private System.Windows.Forms.DataGridViewTextBoxColumn table_number;
-        private System.Windows.Forms.DataGridViewTextBoxColumn table_restaurant_id;
-        private System.Windows.Forms.DataGridViewTextBoxColumn state;
         private System.Windows.Forms.Button AddCustomerButton;
         private System.Windows.Forms.Button DeleteCustomerButton;
         private System.Windows.Forms.Button AssignTableButton;
         private System.Windows.Forms.Button AddOrderButton;
         private System.Windows.Forms.Button CollectPaymentButton;
         private RestaurantsDataSetTableAdapters.tablesTableAdapter tablesTableAdapter;
-        private System.Windows.Forms.BindingSource tablesBindingSource;
+        private RestaurantsDataSetTableAdapters.ordersTableAdapter ordersTableAdapter;
+        private RestaurantsDataSetTableAdapters.waitersTableAdapter waitersTableAdapter;
+        private System.Windows.Forms.DataGridViewTextBoxColumn id;
+        private System.Windows.Forms.DataGridViewTextBoxColumn money;
+        private System.Windows.Forms.DataGridViewTextBoxColumn state_desc;
+        private System.Windows.Forms.DataGridViewTextBoxColumn table_number;
+        private System.Windows.Forms.DataGridViewTextBoxColumn table_restaurant_id;
+        private System.Windows.Forms.DataGridViewTextBoxColumn state;
     }
 }
